@@ -106,7 +106,7 @@ int InnerProduct::forward(const Mat& bottom_blob, Mat& top_blob, const Option& o
         if (top_blob.empty())
             return -100;
 
-#pragma omp parallel for num_threads(opt.num_threads)
+        #pragma omp parallel for num_threads(opt.num_threads)
         for (int j = 0; j < h; j++)
         {
             const float* m = bottom_blob.row(j);
@@ -137,8 +137,8 @@ int InnerProduct::forward(const Mat& bottom_blob, Mat& top_blob, const Option& o
     if (top_blob.empty())
         return -100;
 
-// num_output
-#pragma omp parallel for num_threads(opt.num_threads)
+    // num_output
+    #pragma omp parallel for num_threads(opt.num_threads)
     for (int p = 0; p < num_output; p++)
     {
         float sum = 0.f;
@@ -192,7 +192,7 @@ int InnerProduct::forward_int8(const Mat& bottom_blob, Mat& top_blob, const Opti
         if (top_blob.empty())
             return -100;
 
-#pragma omp parallel for num_threads(opt.num_threads)
+        #pragma omp parallel for num_threads(opt.num_threads)
         for (int j = 0; j < h; j++)
         {
             const signed char* m = bottom_blob_int8.row<signed char>(j);
@@ -230,8 +230,8 @@ int InnerProduct::forward_int8(const Mat& bottom_blob, Mat& top_blob, const Opti
     if (top_blob.empty())
         return -100;
 
-// num_output
-#pragma omp parallel for num_threads(opt.num_threads)
+    // num_output
+    #pragma omp parallel for num_threads(opt.num_threads)
     for (int p = 0; p < num_output; p++)
     {
         float* outptr = top_blob;

@@ -1,17 +1,3 @@
-// Tencent is pleased to support the open source community by making ncnn available.
-//
-// Copyright (C) 2017 THL A29 Limited, a Tencent company. All rights reserved.
-//
-// Licensed under the BSD 3-Clause License (the "License"); you may not use this file except
-// in compliance with the License. You may obtain a copy of the License at
-//
-// https://opensource.org/licenses/BSD-3-Clause
-//
-// Unless required by applicable law or agreed to in writing, software distributed
-// under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-// CONDITIONS OF ANY KIND, either express or implied. See the License for the
-// specific language governing permissions and limitations under the License.
-
 #ifndef NCNN_LAYER_H
 #define NCNN_LAYER_H
 
@@ -32,6 +18,13 @@
 
 namespace ncnn {
 
+// 基类Layer, 统一封装了一些数据成员和函数, virtual函数有默认实现, 也可以等着它的继承者们重新实现 .
+// 主要有一下几个重要的函数:
+// load_param, 负责num_output， activation_type这些的设置
+// load_model, 负责weight_data, bias_data这些的设置
+// create_pipeline, 负责如将weight_data 这些进行pack, 更好的内存排布(访存), 有利于使用指令集intrinsic
+// destroy_pipeline, 负责释放一些资源
+// forward, 负责前向计算
 class NCNN_EXPORT Layer
 {
 public:

@@ -1,3 +1,5 @@
+# cmake 里的-D表示define, 即定义这个变量的值, 类似于string a = "xxx"
+# cmake -DCMAKE_TOOLCHAIN_FILE="../../../android.toolchain.cmake" ..
 if(CMAKE_TOOLCHAIN_FILE)
     set(LIBRARY_OUTPUT_PATH_ROOT ${CMAKE_BINARY_DIR} CACHE PATH "root for library output, set this to change where android libs are compiled to")
     # get absolute path, but get_filename_component ABSOLUTE only refer with source dir, so find_file here :(
@@ -143,6 +145,7 @@ endif()
 
 ##############################################
 
+# 平台检测
 if((IOS AND CMAKE_OSX_ARCHITECTURES MATCHES "arm")
     OR (APPLE AND CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
     OR (CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
@@ -399,9 +402,10 @@ add_subdirectory(src)
 if(NCNN_BUILD_BENCHMARK)
     add_subdirectory(benchmark)
 endif()
-#if(NCNN_BUILD_EXAMPLES)
+if(NCNN_BUILD_EXAMPLES)
 #    add_subdirectory(examples)
-#endif()
+    add_subdirectory(squeezenet)
+endif()
 if(NCNN_BUILD_TOOLS)
     add_subdirectory(tools)
 endif()
@@ -413,4 +417,3 @@ if(NCNN_PYTHON)
     add_subdirectory(python)
 endif()
 
-add_subdirectory(squeezenet)

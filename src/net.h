@@ -63,6 +63,7 @@ public:
 
 #if NCNN_STDIO
 #if NCNN_STRING
+    // notes: 加载param文件（模型结构定义）
     // load network structure from plain param file
     // return 0 if success
     int load_param(FILE* fp);
@@ -74,6 +75,7 @@ public:
     int load_param_bin(FILE* fp);
     int load_param_bin(const char* protopath);
 
+    // notes: 加载模型权重文件（.bin）
     // load network weight data from model file
     // return 0 if success
     int load_model(FILE* fp);
@@ -109,6 +111,7 @@ public:
 #endif // __ANDROID_API__ >= 9
 #endif // NCNN_PLATFORM_API
 
+    // notes: 卸载模型结构和参数
     // unload network structure and weight data
     void clear();
 

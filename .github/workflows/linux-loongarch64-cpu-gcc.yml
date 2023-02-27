@@ -37,7 +37,7 @@ jobs:
       options: --security-opt seccomp=unconfined
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: install-deps
       run: dnf -y install cmake wget xz
